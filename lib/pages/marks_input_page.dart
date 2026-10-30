@@ -84,9 +84,11 @@ class _MarksEntryPageState extends State<MarksEntryPage> {
     punctualityController.dispose();
     remarksController.dispose();
     for (var map in [firstTermControllers, secondTermControllers]) {
-      map.values.forEach((marks) {
-        marks.values.forEach((controller) => controller.dispose());
-      });
+      for (var marks in map.values) {
+        for (var controller in marks.values) {
+          controller.dispose();
+        }
+      }
     }
     super.dispose();
   }
@@ -136,7 +138,7 @@ class _MarksEntryPageState extends State<MarksEntryPage> {
                   ),
                 ],
               );
-            }).toList(),
+            }),
           ],
         ),
       ],
